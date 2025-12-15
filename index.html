@@ -4,126 +4,210 @@
 <meta charset="UTF-8">
 <title>Personal Growth Notes</title>
 
-
-
-
-
-
 <style>
+:root {
+  --bg: #0d1117;
+  --card: #1f1f1f;
+  --card-2: #2b2b2b;
+  --primary: #4caf50;
+  --danger: #f44336;
+  --info: #2196f3;
+  --text: #f0f0f0;
+  --radius: 14px;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: #0d1117;
-  color: #f0f0f0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: 30px;
-  font-size: 18px;
+  padding: 24px;
 }
+
 .container {
   width: 100%;
-  max-width: 700px;
-  background: linear-gradient(145deg, #1c1c1c, #242424);
+  max-width: 720px;
+  background: var(--card);
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
-  padding: 40px;
-  margin-top: 50px;
+  padding: 32px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.6);
 }
+
 h2 {
   text-align: center;
-  margin-bottom: 30px;
-  font-weight: 700;
-  font-size: 2em;
-  color: #e0e0e0;
+  margin-bottom: 24px;
+  font-size: 1.8rem;
 }
-input, textarea, button, select {
-  width: 100%;
-  margin: 10px 0;
-  padding: 14px;
-  border-radius: 16px;
-  border: none;
-  font-size: 1.1em;
-  outline: none;
-  transition: 0.2s;
-}
-input, textarea, select {
-  background: #2b2b2b;
-  color: #f0f0f0;
-}
-input:focus, textarea:focus, select:focus {
-  box-shadow: 0 0 8px #4caf50;
-}
+
+input,
+textarea,
+select,
 button {
-  background: #4caf50;
-  color: #fff;
-  cursor: pointer;
-  font-weight: 700;
-  transition: 0.3s;
-  padding: 14px;
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 1rem;
 }
-button:hover {
-  background: #66bb6a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+
+input,
+textarea,
+select {
+  background: var(--card-2);
+  color: var(--text);
 }
-.category, .note {
-  background: #2b2b2b;
-  padding: 16px;
-  margin-top: 16px;
-  border-radius: 16px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.5);
-  transition: 0.2s;
-  font-size: 1.1em;
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--primary);
 }
-.category:hover, .note:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.6);
-}
-.note { 
-  margin-left: 14px; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-}
-.note span { flex: 1; padding-right: 12px; word-wrap: break-word; }
-.note button { 
-  background: #f44336; 
-  margin-left: 8px; 
-  padding: 6px 10px; 
-  font-size: 1em; 
-  border-radius: 10px;
-  transition: 0.2s;
-}
-.note button:hover { 
-  background: #e57373;
-  transform: translateY(-1px);
-}
-.category-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
+/* Add Note Button */
 .add-note-btn {
-  background: #2196F3;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 30px;
+  transform: translateY(-50%);
+  padding: 13px 9px;
+  font-size: .85rem;
+}
+
+/* Category Action Buttons */
+.category-header .cat-actions {
+  position: absolute;
+  right: 0;
+  top: 35%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.category-header .cat-actions button {
+  background: none;
+  color: var(--info);
+  padding: 5px;
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.category-header .cat-actions button.delete {
+  color: var(--danger);
+}
+
+.category-header .cat-actions button:hover {
+  text-decoration: underline;
+}
+
+
+@media (max-width: 600px) {
+  .category-header strong {
+    font-size: 28px;      /* bigger text */
+    padding: 16px;        /* more space */
+    width: 95%;           /* almost full width */
+    display: block;       /* full width block */
+    margin: 0 auto;       /* center horizontally */
+    box-sizing: border-box;
+  }
+
+  .category {
+    padding: 50px 20px;   /* reduce padding for small screens */
+  }
+  
+  .note {
+    padding: 18px 12px;   /* smaller notes for mobile */
+    margin-top: 40px;
+  }
+}
+
+
+
+button {
+  background: var(--primary);
   color: #fff;
-  font-weight: 700;
-  padding: 10px 16px;
-  border-radius: 14px;
-  transition: 0.3s;
-  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
 }
-.add-note-btn:hover {
-  background: #42a5f5;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+
+button:hover { opacity: .9; }
+
+button.logout { background: var(--danger); }
+
+/* Categories */
+.category {
+  background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+  padding: 70px;
+  border-radius: 18px;
+  margin-top: 20px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.6);
+  position: relative;
 }
+
+/* Category Header */
+.category-header {
+  position: relative;
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #333;
+}
+
+
+.category-header strong {
+  padding: 10px 60px;
+  background: #161b22;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: var(--primary);
+}
+
+/* Notes */
+.note {
+  background: #161b22;
+  padding: 22px 14px;
+  border-radius: 20px;
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.note span { flex: 1; word-break: break-word; }
+
+.note button {
+  background: none;
+  color: var(--info);
+  padding: 0;
+  margin: 0 6px;
+  width: 50px;
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.note button:hover { text-decoration: underline; }
+.note button:last-child { color: var(--danger); }
+
 .hidden { display: none; }
+
+@media (max-width: 600px) {
+  .container { padding: 20px; }
+  h2 { font-size: 1.5rem; }
+}
+
+
+
+
+
+
 </style>
-
-
-
 </head>
 <body>
 
@@ -131,16 +215,16 @@ button:hover {
   <h2>Login / Sign Up</h2>
   <input id="username" placeholder="Username">
   <input id="password" type="password" placeholder="Password">
-  <button onclick="signup()">Sign Up</button>
-  <button onclick="login()">Login</button>
+  <button onclick="signup()">دروستکردنی ئەکاونتی نوێ</button>
+  <button onclick="login()">چوونەژورەوە</button>
 </div>
 
 <div class="container hidden" id="notesBox">
-  <h2>My Notes</h2>
-  <input id="newCategory" placeholder="New category name">
-  <button onclick="addCategory()">Add Category</button>
+  <h2>زانیاریەکانم</h2>
+  <input id="newCategory" placeholder="ناوی خشتە">
+  <button onclick="addCategory()">زیادکردنی خشتە</button>
   <div id="categories"></div>
-  <button onclick="logout()">Logout</button>
+  <button class="logout" onclick="logout()">Logout</button>
 </div>
 
 <script>
@@ -152,39 +236,30 @@ const notesBox = document.getElementById("notesBox");
 
 if(currentUser) showNotes();
 
-function saveUsers() {
-  localStorage.setItem("users", JSON.stringify(users));
-}
+function saveUsers() { localStorage.setItem("users", JSON.stringify(users)); }
 
 function signup() {
   const u = username.value.trim();
   const p = password.value;
   if(!u || !p) return alert("Fill all fields");
-  if(users[u]) return alert("User exists");
+  if(users[u]) return alert("ناتوانیت چەند ئەکاونتێک دروست بکەیت بە هەمان یوسەر");
   users[u] = { password: p, categories: {} };
   saveUsers();
-  alert("Account created");
+  alert("ئەکاونتەکە دروستکرا");
 }
 
 function login() {
   const u = username.value.trim();
   const p = password.value;
-  if(!users[u] || users[u].password !== p) return alert("Wrong login");
+  if(!users[u] || users[u].password !== p) return alert("پاسوۆرد یان یوسەر هەڵەیە");
   currentUser = u;
   localStorage.setItem("currentUser", u);
   showNotes();
 }
 
-function logout() {
-  localStorage.removeItem("currentUser");
-  location.reload();
-}
+function logout() { localStorage.removeItem("currentUser"); location.reload(); }
 
-function showNotes() {
-  authBox.classList.add("hidden");
-  notesBox.classList.remove("hidden");
-  render();
-}
+function showNotes() { authBox.classList.add("hidden"); notesBox.classList.remove("hidden"); render(); }
 
 function addCategory() {
   const name = newCategory.value.trim();
@@ -219,34 +294,77 @@ function deleteNote(cat, index) {
   render();
 }
 
+function editCategory(cat) {
+  const newName = prompt("Edit category name:", cat);
+  if(!newName || newName === cat) return;
+  if(users[currentUser].categories[newName]) return alert("Category exists");
+  users[currentUser].categories[newName] = users[currentUser].categories[cat];
+  delete users[currentUser].categories[cat];
+  saveUsers();
+  render();
+}
+
+function deleteCategory(cat) {
+  if(!confirm("Delete this category and all notes?")) return;
+  delete users[currentUser].categories[cat];
+  saveUsers();
+  render();
+}
+
 function render() {
   const container = document.getElementById("categories");
   container.innerHTML = "";
   const cats = users[currentUser].categories;
+
   for(const cat in cats) {
     const div = document.createElement("div");
     div.className = "category";
+
     const header = document.createElement("div");
     header.className = "category-header";
     header.innerHTML = `<strong>${cat}</strong>`;
+
+    // Add Note button
     const addBtn = document.createElement("button");
-    addBtn.textContent = "+ Add Note";
+    addBtn.textContent = "+ زیادکردنی تێبینی";
     addBtn.className = "add-note-btn";
     addBtn.onclick = () => addNote(cat);
     header.appendChild(addBtn);
+
+    // Edit/Delete category buttons
+    const editCatBtn = document.createElement("button");
+    editCatBtn.textContent = "Edit";
+    editCatBtn.className = "cat-action";
+    editCatBtn.onclick = () => editCategory(cat);
+
+    const delCatBtn = document.createElement("button");
+    delCatBtn.textContent = "Delete";
+    delCatBtn.className = "cat-action delete";
+    delCatBtn.onclick = () => deleteCategory(cat);
+
+    const actionsDiv = document.createElement("div");
+    actionsDiv.className = "cat-actions";
+    actionsDiv.appendChild(editCatBtn);
+    actionsDiv.appendChild(delCatBtn);
+    header.appendChild(actionsDiv);
+
     div.appendChild(header);
 
+    // Notes
     cats[cat].forEach((n, i) => {
       const noteDiv = document.createElement("div");
       noteDiv.className = "note";
       noteDiv.innerHTML = `<span>${n.content}</span>`;
+
       const btns = document.createElement("div");
       const editBtn = document.createElement("button");
       editBtn.textContent = "Edit";
       editBtn.onclick = () => editNote(cat, i);
+
       const delBtn = document.createElement("button");
       delBtn.textContent = "Delete";
       delBtn.onclick = () => deleteNote(cat, i);
+
       btns.appendChild(editBtn);
       btns.appendChild(delBtn);
       noteDiv.appendChild(btns);
