@@ -20,15 +20,15 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  flex-direction: column;
+  height: 100vh;         /* force viewport height */
+  overflow: hidden;       /* hide scroll */
+}
+
+.container {
+  max-height: 100%;       /* don't exceed viewport */
+  overflow-y: auto;       /* allow internal scroll if needed */
+  padding: 20px;          /* reduce padding for large screens too */
 }
 
 .container {
