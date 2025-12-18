@@ -1,4 +1,3 @@
-
 let users = JSON.parse(localStorage.getItem("users") || "{}");
 let currentUser = localStorage.getItem("currentUser");
 
@@ -95,14 +94,12 @@ function render() {
     header.className = "category-header";
     header.innerHTML = `<strong>${cat}</strong>`;
 
-    // Add Note button
     const addBtn = document.createElement("button");
     addBtn.textContent = "+ زیادکردنی تێبینی";
     addBtn.className = "add-note-btn";
     addBtn.onclick = () => addNote(cat);
     header.appendChild(addBtn);
 
-    // Edit/Delete category buttons
     const editCatBtn = document.createElement("button");
     editCatBtn.textContent = "Edit";
     editCatBtn.className = "cat-action";
@@ -121,7 +118,6 @@ function render() {
 
     div.appendChild(header);
 
-    // Notes
     cats[cat].forEach((n, i) => {
       const noteDiv = document.createElement("div");
       noteDiv.className = "note";
@@ -144,4 +140,37 @@ function render() {
 
     container.appendChild(div);
   }
+}
+
+// ===== BACKUP =====
+function exportBackup() {
+  saveUsers(); // save latest
+  const data = localStorage.getItem("users");
+  if (!data || data === "{}") return alert("هیچ داتایەک بوونی نیە");
+
+  const blob = new Blob([data], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "personal-growth-backup.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importBackup(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    try {
+      const imported = JSON.parse(event.target.result);
+      users = imported;
+      saveUsers();
+      if(currentUser) render();
+      alert("بە سەرکەوتووی ئەنجامدرا");
+    } catch(err) {
+      alert("باکەپێکی هەڵەیە");
+    }
+  };
+  reader.readAsText(file);
 }

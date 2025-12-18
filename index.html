@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/png" href="icon.jpg">
+  <link rel="icon" type="image/png" href="icon-192.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="UTF-8">
-<title>Personal Growth Notes</title>
+  <title>Personal Growth Notes</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,10 +23,17 @@
   <input id="newCategory" placeholder="ناوی خشتە">
   <button onclick="addCategory()">زیادکردنی خشتە</button>
   <div id="categories"></div>
+  <hr>
+  <!-- Backup Buttons -->
+<div class="container" id="backupBox">
+<h2 class="backup-title">گەڕاندنەوەی داتاکان</h2>
+  <button class="backup-btn" onclick="exportBackup()">Backup</button>
+  <input type="file" class="backup-btn" id="importFile" onchange="importBackup(event)">
+</div>
+
   <button class="logout" onclick="logout()">Logout</button>
 </div>
+
 <script src="app.js"></script>
 </body>
 </html>
-
-
