@@ -12,7 +12,7 @@ function saveUsers() { localStorage.setItem("users", JSON.stringify(users)); }
 function signup() {
   const u = username.value.trim();
   const p = password.value;
-  if(!u || !p) return alert("Fill all fields");
+  if(!u || !p) return alert("خانەکان بە بەتاڵی جێ مەهێڵە");
   if(users[u]) return alert("ناتوانیت چەند ئەکاونتێک دروست بکەیت بە هەمان یوسەر");
   users[u] = { password: p, categories: {} };
   saveUsers();
@@ -34,8 +34,8 @@ function showNotes() { authBox.classList.add("hidden"); notesBox.classList.remov
 
 function addCategory() {
   const name = newCategory.value.trim();
-  if(!name) return alert("Enter category name");
-  if(users[currentUser].categories[name]) return alert("Category exists");
+  if(!name) return alert("ناوی خشتەی نوێیەکە؟");
+  if(users[currentUser].categories[name]) return alert("ئەو خشتەیە بوونی هەیە ناوێکی تر دابنێ");
   users[currentUser].categories[name] = [];
   newCategory.value = "";
   saveUsers();
@@ -43,7 +43,7 @@ function addCategory() {
 }
 
 function addNote(cat) {
-  const text = prompt("Write your note:");
+  const text = prompt("تێبینیەکەت بنووسە؟");
   if(!text) return;
   users[currentUser].categories[cat].push({ content: text });
   saveUsers();
@@ -51,7 +51,7 @@ function addNote(cat) {
 }
 
 function editNote(cat, index) {
-  const newText = prompt("Edit note:", users[currentUser].categories[cat][index].content);
+  const newText = prompt("دەستکاریکردنی تێبینیەکە", users[currentUser].categories[cat][index].content);
   if(!newText) return;
   users[currentUser].categories[cat][index].content = newText;
   saveUsers();
@@ -59,16 +59,16 @@ function editNote(cat, index) {
 }
 
 function deleteNote(cat, index) {
-  if(!confirm("Delete this note?")) return;
+  if(!confirm("ئەتەوێت ئەم تێبییە بسڕیتەوە؟")) return;
   users[currentUser].categories[cat].splice(index, 1);
   saveUsers();
   render();
 }
 
 function editCategory(cat) {
-  const newName = prompt("Edit category name:", cat);
+  const newName = prompt("دەستکاری ناوی خشتەکە ئەکەیت؟", cat);
   if(!newName || newName === cat) return;
-  if(users[currentUser].categories[newName]) return alert("Category exists");
+  if(users[currentUser].categories[newName]) return alert("ئەم ناوە بوونی هەیە ناوێکی تر بدۆزەوە");
   users[currentUser].categories[newName] = users[currentUser].categories[cat];
   delete users[currentUser].categories[cat];
   saveUsers();
@@ -76,7 +76,7 @@ function editCategory(cat) {
 }
 
 function deleteCategory(cat) {
-  if(!confirm("Delete this category and all notes?")) return;
+  if(!confirm("ئەم خشتەیە بسڕیتەوە هەموو تێبینیەکانی ئەم خشتەیە دەسڕێتەوە")) return;
   delete users[currentUser].categories[cat];
   saveUsers();
   render();
