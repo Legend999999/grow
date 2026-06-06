@@ -1,39 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ku" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+
+  
+
+
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/png" href="icon-192.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Personal Growth Notes</title>
-  <link rel="stylesheet" href="style.css">
+<link rel="icon" href="image/mbti313-192.png" type="image/png">
+<meta name="theme-color" content="#0d1117">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>کەسایەتی MBTI</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="common/style.css" />
 </head>
 <body>
 
-<div class="container" id="authBox">
-  <h2>Login / Sign Up</h2>
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
-  <button onclick="signup()">دروستکردنی ئەکاونتی نوێ</button>
-  <button onclick="login()">چوونەژورەوە</button>
-</div>
+  <!-- Hamburger Menu -->
+  <div class="menu-dots" id="menuToggle" aria-label="مێنیو" role="button" tabindex="0">
+    <div id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <!-- Dropdown Menu -->
+    <nav class="dropdown-menu" id="dropdownMenu">
+      <div class="dropdown-item" onclick="location.href='index.html'">سەرەکی</div>
+      <div class="dropdown-item" onclick="location.href='mbti/welcome.html'">تاقیکردنەوەی MBTI</div>
+      <div class="dropdown-item" onclick="location.href='about.html'">دەربارە</div>
+      <div class="dropdown-item" onclick="location.href='contact.html'">پەیوەندی</div>
+      <div class="dropdown-item" onclick="location.href='settings.html'">ڕێکخستن</div>
+    </nav>
+  </div>
 
-<div class="container hidden" id="notesBox">
-  <h2>زانیاریەکانم</h2>
-  <input id="newCategory" placeholder="ناوی خشتە">
-  <button onclick="addCategory()">زیادکردنی خشتە</button>
-  <div id="categories"></div>
-  <hr>
-  <!-- Backup Buttons -->
-<div class="container" id="backupBox">
-<h2 class="backup-title">گەڕاندنەوەی داتاکان</h2>
-  <button class="backup-btn" onclick="exportBackup()">Backup</button>
-  <input type="file" class="backup-btn" id="importFile" onchange="importBackup(event)">
-</div>
+  <header>
+    <h1>بەخێربێیت</h1>
+    <p>ئەتوانیت تاقیکردنەوەی خۆت بکەیت <br> کەسایەتی خۆت بزانیت</p>
+  </header>
 
-  <button class="logout" onclick="logout()">Logout</button>
-</div>
+  <main>
+    <div class="test-links"> 
+      <a href="mbti/welcome.html" class="btn">
+        <span class="btn-icon">🧠</span>
+        <span>تاقیکردنەوەی MBTI</span>
+        <span class="btn-label">کەسایەتی خۆت بزانە</span>
+      </a>
+    </div>
+  </main>
 
-<script src="app.js"></script>
+<footer>
+  <p>&copy; <span id="year"></span> MBTI313</p>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Hamburger Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target)) {
+        menuToggle.classList.remove('active');
+      }
+    });
+    
+    // Keyboard accessibility
+    menuToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        menuToggle.classList.toggle('active');
+      }
+    });
+    
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        menuToggle.classList.remove('active');
+      }
+    });
+  </script>
+
 </body>
 </html>
